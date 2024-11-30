@@ -1,4 +1,4 @@
-import LogoIcon from "@/assets/logo.svg";
+import LogoIcon from "@/assets/logo.png";
 import MenuIcon from "@/assets/icon-menu.svg";
 import { Button } from "@/components/Button";
 
@@ -10,8 +10,8 @@ export const Header = () => {
         <div className="flex justify-between items-center md:border border-white/15 md:p-2.5 rounded-xl max-w-2xl mx-auto relative">
         <div className="absolute inset-0 backdrop-blur -z-10 hidden md:block"></div>
           <div>
-            <div className="border h-10 w-10 rounded-lg inline-flex justify-center items-center border-white/15">
-              <span><LogoIcon className="h-8 w-8" /></span>
+            <div className="h-14 w-14 rounded-lg inline-flex justify-center items-center">
+              <span><img src={LogoIcon.src} alt="" /></span>
             </div>
           </div>
           <div className="hidden md:block">
