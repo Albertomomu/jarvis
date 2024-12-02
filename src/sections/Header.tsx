@@ -11,6 +11,7 @@ export const Header = () => {
         <div className="absolute inset-0 backdrop-blur -z-10 hidden md:block"></div>
           <div>
             <div className="h-14 w-14 rounded-lg inline-flex justify-center items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <span><img src={LogoIcon.src} alt="" /></span>
             </div>
           </div>

@@ -21,7 +21,7 @@ export const Hero = () => {
       backgroundPositionX: starsBg.width,
     }}
     transition={{
-      duration: 120,
+      duration: 60,
       ease: "linear",
       repeat: Infinity,
     }}
