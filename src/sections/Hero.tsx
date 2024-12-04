@@ -3,9 +3,7 @@ import { Button } from "@/components/Button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 
-// Nuevo componente para las líneas tecnológicas
 const TechLines = () => {
-  // Definimos un conjunto fijo de paths
   const paths = [
     "M0,20 H30 V40 H50 V50",
     "M0,40 H20 V60 H40 V50 H50",
@@ -46,9 +44,9 @@ const TechLines = () => {
       <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
         <defs>
           <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(59, 130, 246, 0)" />
-            <stop offset="50%" stopColor="rgba(59, 130, 246, 1)" />
-            <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+            <stop offset="0%" stopColor="rgba(140, 69, 255, 0)" />
+            <stop offset="50%" stopColor="rgba(140, 69, 255, 1)" />
+            <stop offset="100%" stopColor="rgba(140, 69, 255, 0)" />
           </linearGradient>
         </defs>
         {paths.map((path, i) => (
@@ -56,7 +54,7 @@ const TechLines = () => {
             <path
               d={path}
               fill="none"
-              stroke="rgba(59, 130, 246, 0.05)"
+              stroke="rgba(140, 69, 255, 0.05)"
               strokeWidth="0.1"
             />
             <motion.path
@@ -90,30 +88,41 @@ export const Hero = () => {
   const backgroundPositionY = useTransform(scrollYProgress, [0, 1], [-300, 300]);
 
   return (
-  <motion.section
-    ref={sectionRef}
-    className="h-[492px] md:h-[800px] flex items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
-    style={{
-      backgroundPositionY,
-    }}>
-    <TechLines />
-    <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgba(0,119,255,0.3)_15%,rgba(0,21,36,0.5)_78%,transparent)]"></div>
-    {/* Start Arc Reactor */}
-    <div className="absolute h-64 w-64 md:h-96 md:w-96 rounded-full border border-blue-400/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(50%_50%_at_center,white,#00a2ff_37.7%,#001842)] shadow-[0_0_50px_rgb(0,162,255),0_0_100px_rgb(0,162,255)]">
-      <div className="absolute inset-4 border-4 border-blue-400 rounded-full"></div>
-      <div className="absolute inset-8 border-2 border-blue-300 rounded-full"></div>
-      <div className="absolute inset-0 m-auto w-16 h-16 bg-blue-500 rounded-full shadow-[0_0_20px_rgb(0,162,255)] flex items-center justify-center">
-        <div className="w-8 h-8 bg-white rounded-full"></div>
+    <motion.section
+      ref={sectionRef}
+      className="h-[492px] md:h-[800px] flex flex-col items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
+      style={{
+        backgroundPositionY,
+      }}>
+      {useMemo(() => <TechLines />, [])}
+      <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgba(140,69,255,0.3)_15%,rgba(14,0,36,0.5)_78%,transparent)]"></div>
+      
+      {/* Title, Subtitle and Button */}
+      <div className="container relative mt-8 z-10">
+        <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-purple-400 bg-[radial-gradient(100%_100%_at_top_left,#8c45ff,white,rgba(140,69,255,0.5))] text-transparent bg-clip-text text-center">Jarvis</h1>
+        <p className="text-lg md:text-xl text-purple-100/70 mt-5 text-center max-w-xl mx-auto">Tu núcleo de confianza y crecimiento.</p>
+        <div className="flex justify-center mt-5">
+          <Button>Descubre Jarvis</Button>
+        </div>
       </div>
-    </div>
-    {/* End Arc Reactor */}
-    <div className="container relative mt-16">
-      <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-blue-400 bg-[radial-gradient(100%_100%_at_top_left,#00a2ff,white,rgba(0,162,255,0.5))] text-transparent bg-clip-text text-center">Jarvis</h1>
-      <p className="text-lg md:text-xl text-blue-100/70 mt-5 text-center max-w-xl mx-auto">Tu núcleo de confianza y crecimiento.</p>
-      <div className="flex justify-center mt-5">
-        <Button>Descubre Jarvis</Button>
+  
+      {/* Start Arc Reactor */}
+      <div className="absolute h-64 w-64 md:h-96 md:w-96 rounded-full border border-purple-400/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(50%_50%_at_center,white,#8c45ff_37.7%,#1e0042)] shadow-[0_0_50px_rgb(140,69,255),0_0_100px_rgb(140,69,255)] mt-32">
+        <div className="absolute inset-4 border-4 border-purple-400 rounded-full"></div>
+        <motion.div 
+          className="absolute inset-8 border-2 border-white rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+        <div className="absolute inset-0 m-auto w-16 h-16 bg-purple-500 rounded-full shadow-[0_0_20px_rgb(140,69,255)] flex items-center justify-center">
+          <div className="w-8 h-8 bg-white rounded-full"></div>
+        </div>
       </div>
-    </div>
-  </motion.section>
+      {/* End Arc Reactor */}
+    </motion.section>
   );
 };
