@@ -1,7 +1,7 @@
 'use client';
 import { Button } from "@/components/Button";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useMemo, useRef } from "react";
+import { motion } from "framer-motion";
+import { useMemo, } from "react";
 
 const TechLines = () => {
   const paths = [
@@ -79,21 +79,10 @@ const TechLines = () => {
 };
 
 export const Hero = () => {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const backgroundPositionY = useTransform(scrollYProgress, [0, 1], [-300, 300]);
 
   return (
     <motion.section
-      ref={sectionRef}
-      className="h-[492px] md:h-[800px] flex flex-col items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
-      style={{
-        backgroundPositionY,
-      }}>
+      className="h-[492px] md:h-[800px] flex flex-col items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
       {useMemo(() => <TechLines />, [])}
       <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgba(140,69,255,0.3)_15%,rgba(14,0,36,0.5)_78%,transparent)]"></div>
       
