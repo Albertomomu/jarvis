@@ -1,7 +1,7 @@
 'use client';
 import { Button } from "@/components/Button";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 // Nuevo componente para las líneas tecnológicas
 const TechLines = () => {
@@ -18,12 +18,10 @@ const TechLines = () => {
       const dy = (centerY - y) / (steps - i);
       
       if (Math.random() > 0.7) {
-        // Añadir un tramo diagonal
         x += dx * 0.7;
         y += dy * 0.7;
         path += `L${x},${y} `;
       } else {
-        // Tramos rectos con posibilidad de ser diagonales
         if (Math.abs(dx) > Math.abs(dy) || Math.random() > 0.5) {
           x += dx;
           path += `H${x} `;
@@ -34,55 +32,68 @@ const TechLines = () => {
       }
     }
     
-    // Asegurar que el último tramo apunte al centro
     path += `L${centerX},${centerY}`;
     return path;
   };
 
   const lines = 40;
 
+  const paths = useMemo(() => {
+    const generatedPaths = [];
+    for (let i = 0; i < lines; i++) {
+      let startX, startY;
+      if (i < lines / 4) {
+        startX = 0;
+        startY = Math.random() * 100;
+      } else if (i < lines / 2) {
+        startX = 100;
+        startY = Math.random() * 100;
+      } else if (i < 3 * lines / 4) {
+        startX = Math.random() * 100;
+        startY = 0;
+      } else {
+        startX = Math.random() * 100;
+        startY = 100;
+      }
+      generatedPaths.push(createPath(startX, startY));
+    }
+    return generatedPaths;
+  }, []);
+
   return (
     <div className="absolute inset-0 overflow-hidden">
       <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
         <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(59, 130, 246, 0)" />
             <stop offset="50%" stopColor="rgba(59, 130, 246, 1)" />
             <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
           </linearGradient>
         </defs>
-        {[...Array(lines)].map((_, i) => {
-          const startX = Math.random() > 0.5 ? 0 : 100;
-          const startY = Math.random() * 100;
-          const path = createPath(startX, startY);
-          return (
-            <g key={i}>
-              <path
-                d={path}
-                fill="none"
-                stroke="rgba(59, 130, 246, 0.05)"
-                strokeWidth="0.1"
-              />
-              <motion.path
-                d={path}
-                fill="none"
-                stroke="url(#lineGradient)"
-                strokeWidth="0.2"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{
-                  duration: Math.random() * 5 + 5,
-                  repeat: Infinity,
-                  ease: "linear",
-                  opacity: {
-                    duration: 0.5,
-                    yoyo: Infinity,
-                  }
-                }}
-              />
-            </g>
-          );
-        })}
+        {paths.map((path, i) => (
+          <g key={i}>
+            <path
+              d={path}
+              fill="none"
+              stroke="rgba(59, 130, 246, 0.05)"
+              strokeWidth="0.1"
+            />
+            <motion.path
+              d={path}
+              fill="none"
+              stroke="url(#sparkGradient)"
+              strokeWidth="0.2"
+              strokeLinecap="round"
+              initial={{ strokeDasharray: "0.5 99.5" }}
+              animate={{ strokeDashoffset: ["0%", "-100%"] }}
+              transition={{
+                duration: Math.random() * 5 + 5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          </g>
+        ))}
       </svg>
     </div>
   );
