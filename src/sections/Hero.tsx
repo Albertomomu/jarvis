@@ -5,60 +5,41 @@ import { useMemo, useRef } from "react";
 
 // Nuevo componente para las líneas tecnológicas
 const TechLines = () => {
-  const createPath = (startX, startY) => {
-    let path = `M${startX},${startY} `;
-    let x = startX;
-    let y = startY;
-    const centerX = 50;
-    const centerY = 50;
-    const steps = Math.floor(Math.random() * 3) + 3;
-
-    for (let i = 0; i < steps; i++) {
-      const dx = (centerX - x) / (steps - i);
-      const dy = (centerY - y) / (steps - i);
-      
-      if (Math.random() > 0.7) {
-        x += dx * 0.7;
-        y += dy * 0.7;
-        path += `L${x},${y} `;
-      } else {
-        if (Math.abs(dx) > Math.abs(dy) || Math.random() > 0.5) {
-          x += dx;
-          path += `H${x} `;
-        } else {
-          y += dy;
-          path += `V${y} `;
-        }
-      }
-    }
-    
-    path += `L${centerX},${centerY}`;
-    return path;
-  };
-
-  const lines = 40;
-
-  const paths = useMemo(() => {
-    const generatedPaths = [];
-    for (let i = 0; i < lines; i++) {
-      let startX, startY;
-      if (i < lines / 4) {
-        startX = 0;
-        startY = Math.random() * 100;
-      } else if (i < lines / 2) {
-        startX = 100;
-        startY = Math.random() * 100;
-      } else if (i < 3 * lines / 4) {
-        startX = Math.random() * 100;
-        startY = 0;
-      } else {
-        startX = Math.random() * 100;
-        startY = 100;
-      }
-      generatedPaths.push(createPath(startX, startY));
-    }
-    return generatedPaths;
-  }, []);
+  // Definimos un conjunto fijo de paths
+  const paths = [
+    "M0,20 H30 V40 H50 V50",
+    "M0,40 H20 V60 H40 V50 H50",
+    "M0,60 H40 V40 H60 V50",
+    "M0,80 H60 V60 H40 V50",
+    "M20,0 V30 H40 V50",
+    "M40,0 V20 H60 V40 H50",
+    "M60,0 V40 H40 V60 H50",
+    "M80,0 V60 H60 V40 H50",
+    "M100,20 H70 V40 H50",
+    "M100,40 H80 V60 H60 V50",
+    "M100,60 H60 V40 H50",
+    "M100,80 H80 V60 H60 V50",
+    "M20,100 V70 H40 V50",
+    "M40,100 V80 H60 V60 H50",
+    "M60,100 V80 H40 V60 H50",
+    "M80,100 V40 H60 V50",
+    "M0,0 H20 V20 H40 V40 H50",
+    "M100,0 H80 V20 H60 V40 H50",
+    "M0,100 H20 V80 H40 V60 H50",
+    "M100,100 H80 V80 H60 V60 H50",
+    "M50,0 V20 H30 V40 H50",
+    "M50,100 V80 H70 V60 H50",
+    "M0,50 H20 V30 H40 V50",
+    "M100,50 H80 V70 H60 V50",
+    "M25,0 V25 H50 V50",
+    "M75,0 V25 H50 V50",
+    "M25,100 V75 H50 V50",
+    "M75,100 V75 H50 V50",
+    "M0,25 H25 V50 H50",
+    "M0,75 H25 V50 H50",
+    "M100,25 H75 V50 H50",
+    "M100,75 H75 V50 H50"
+  ];
 
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -87,7 +68,7 @@ const TechLines = () => {
               initial={{ strokeDasharray: "0.5 99.5" }}
               animate={{ strokeDashoffset: ["0%", "-100%"] }}
               transition={{
-                duration: Math.random() * 5 + 5,
+                duration: 10 + i * 0.5,
                 repeat: Infinity,
                 ease: "linear",
               }}
