@@ -4,34 +4,89 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 // Nuevo componente para las líneas tecnológicas
-const TechLines = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    {[...Array(20)].map((_, i) => (
-      <div
-        key={i}
-        className="absolute h-px bg-blue-200/10"
-        style={{
-          top: `${Math.random() * 100}%`,
-          left: '-10%',
-          right: '-10%',
-          transform: `rotate(${Math.random() * 180 - 90}deg)`,
-        }}
-      >
-        <motion.div
-          className="h-full w-full bg-gradient-to-r from-transparent via-blue-400 to-transparent"
-          animate={{
-            x: ['-100%', '100%'],
-          }}
-          transition={{
-            duration: Math.random() * 3 + 2,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      </div>
-    ))}
-  </div>
-);
+const TechLines = () => {
+  const createPath = (startX, startY) => {
+    let path = `M${startX},${startY} `;
+    let x = startX;
+    let y = startY;
+    const centerX = 50;
+    const centerY = 50;
+    const steps = Math.floor(Math.random() * 3) + 3;
+
+    for (let i = 0; i < steps; i++) {
+      const dx = (centerX - x) / (steps - i);
+      const dy = (centerY - y) / (steps - i);
+      
+      if (Math.random() > 0.7) {
+        // Añadir un tramo diagonal
+        x += dx * 0.7;
+        y += dy * 0.7;
+        path += `L${x},${y} `;
+      } else {
+        // Tramos rectos con posibilidad de ser diagonales
+        if (Math.abs(dx) > Math.abs(dy) || Math.random() > 0.5) {
+          x += dx;
+          path += `H${x} `;
+        } else {
+          y += dy;
+          path += `V${y} `;
+        }
+      }
+    }
+    
+    // Asegurar que el último tramo apunte al centro
+    path += `L${centerX},${centerY}`;
+    return path;
+  };
+
+  const lines = 40;
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(59, 130, 246, 0)" />
+            <stop offset="50%" stopColor="rgba(59, 130, 246, 1)" />
+            <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+          </linearGradient>
+        </defs>
+        {[...Array(lines)].map((_, i) => {
+          const startX = Math.random() > 0.5 ? 0 : 100;
+          const startY = Math.random() * 100;
+          const path = createPath(startX, startY);
+          return (
+            <g key={i}>
+              <path
+                d={path}
+                fill="none"
+                stroke="rgba(59, 130, 246, 0.05)"
+                strokeWidth="0.1"
+              />
+              <motion.path
+                d={path}
+                fill="none"
+                stroke="url(#lineGradient)"
+                strokeWidth="0.2"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{
+                  duration: Math.random() * 5 + 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                  opacity: {
+                    duration: 0.5,
+                    yoyo: Infinity,
+                  }
+                }}
+              />
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+};
 
 export const Hero = () => {
   const sectionRef = useRef(null);
@@ -60,59 +115,6 @@ export const Hero = () => {
       </div>
     </div>
     {/* End Arc Reactor */}
-    {/* Start ring 1 */}
-    <motion.div 
-    style={{
-      translateX: "-50%",
-      translateY: "-50%",
-    }}
-    animate={{
-      rotate: "1turn",
-    }} transition={{
-      duration: 30,
-      ease: "linear",
-      repeat: Infinity,
-    }} className="absolute h-[344px] w-[344px] md:h-[580px] md:w-[590px] border border-blue-400/50 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div className="absolute h-2 w-2 left-0 bg-blue-400 rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute h-2 w-2 left-1/2 bg-blue-400 rounded-full top-0 -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute h-5 w-5 left-full border border-blue-400 rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center">
-        <div className="h-2 w-2 bg-blue-400 rounded-full"></div>
-      </div>
-    </motion.div>
-    {/* End ring 1 */}
-    {/* Start ring 2 */}
-    <motion.div 
-    style={{
-      translateX: "-50%",
-      translateY: "-50%",
-    }}
-    animate={{
-      rotate: "-1turn",
-    }} transition={{
-      duration: 60,
-      ease: "linear",
-      repeat: Infinity,
-    }}
-    className="absolute h-[444px] w-[444px] md:h-[780px] md:w-[780px] rounded-full border border-blue-300/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed"></motion.div>
-    {/* End ring 2 */}
-    {/* Start ring 3 */}
-    <motion.div
-    style={{
-      translateX: "-50%",
-      translateY: "-50%",
-    }}
-    animate={{
-      rotate: "1turn",
-    }} transition={{
-      duration: 90,
-      ease: "linear",
-      repeat: Infinity,
-    }}
-    className="absolute h-[544px] w-[544px] md:h-[980px] md:w-[980px] rounded-full border border-blue-200/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div className="absolute h-2 w-2 left-0 bg-blue-200 rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute h-2 w-2 left-full bg-blue-200 rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-    </motion.div>
-    {/* End ring 3 */}
     <div className="container relative mt-16">
       <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-blue-400 bg-[radial-gradient(100%_100%_at_top_left,#00a2ff,white,rgba(0,162,255,0.5))] text-transparent bg-clip-text text-center">Jarvis</h1>
       <p className="text-lg md:text-xl text-blue-100/70 mt-5 text-center max-w-xl mx-auto">Tu núcleo de confianza y crecimiento.</p>
