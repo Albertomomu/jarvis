@@ -97,20 +97,37 @@ export const Hero = () => {
   
       {/* Start Arc Reactor */}
       <div className="absolute h-64 w-64 md:h-96 md:w-96 rounded-full border border-purple-400/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(50%_50%_at_center,white,#8c45ff_37.7%,#1e0042)] shadow-[0_0_50px_rgb(140,69,255),0_0_100px_rgb(140,69,255)] mt-32">
-        <div className="absolute inset-4 border-4 border-purple-400 rounded-full"></div>
-        <motion.div 
-          className="absolute inset-8 border-2 border-white rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        ></motion.div>
-        <div className="absolute inset-0 m-auto w-16 h-16 bg-purple-500 rounded-full shadow-[0_0_20px_rgb(140,69,255)] flex items-center justify-center">
-          <div className="w-8 h-8 bg-white rounded-full"></div>
-        </div>
-      </div>
+  {/* Anillo exterior */}
+  <div className="absolute inset-4 border-4 border-purple-400 rounded-full"></div>
+  
+  {/* Anillo giratorio con borde de color diferente */}
+  <motion.div 
+    className="absolute inset-8 flex items-center justify-center rounded-full"
+    animate={{ rotate: 360 }}
+    transition={{
+      duration: 10,
+      repeat: Infinity,
+      ease: "linear"
+    }}
+  >
+    <div className="w-full h-full border-2 border-white rounded-full relative">
+      <div className="absolute inset-0 border-2 border-blue-400 opacity-75 rounded-full" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)' }} />
+    </div>
+  </motion.div>
+  
+  {/* Núcleo central con sombra */}
+  <div className="absolute inset-0 m-auto w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full shadow-[0_0_20px_rgb(140,69,255)] flex items-center justify-center">
+    <motion.div 
+      className="w-8 h-8 bg-white rounded-full"
+      animate={{ scale: [1, 1.1, 1] }} // Manteniendo la animación de pulso
+      transition={{
+        duration: 3, // Aumentar la duración para que sea más lento
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    />
+  </div>
+</div>
       {/* End Arc Reactor */}
     </motion.section>
   );
