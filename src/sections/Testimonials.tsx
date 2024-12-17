@@ -8,37 +8,38 @@ import { motion } from "framer-motion";
 
 const testimonials = [
   {
-    text: "“This product has completely transformed how I manage my projects and deadlines”",
-    name: "Sophia Perez",
-    title: "Director @ Quantum",
+    text: "“Jarvis ha transformado completamente nuestra presencia online y estrategia de marketing digital.”",
+    name: "Sofía Pérez",
+    title: "Directora de Marketing @ TechnoVision",
     avatarImg: avatar1,
   },
   {
-    text: "“These AI tools have completely revolutionized our SEO entire strategy overnight”",
-    name: "Jamie Lee",
-    title: "Founder @ Pulse",
+    text: "“Las herramientas de SEO de Jarvis han revolucionado nuestra visibilidad en buscadores en tiempo récord.”",
+    name: "Javier López",
+    title: "Fundador @ Innova Digital",
     avatarImg: avatar2,
   },
   {
-    text: "“The user interface is so intuitive and easy to use, it has saved us countless hours”",
-    name: "Alisa Hester",
-    title: "Product @ Innovate",
+    text: "“La interfaz de usuario de nuestra nueva web es tan intuitiva que ha mejorado significativamente la experiencia de nuestros clientes.”",
+    name: "Ana Martínez",
+    title: "Gerente de Producto @ E-Commerce Plus",
     avatarImg: avatar3,
   },
   {
-    text: "“Our team's productivity has increased significantly since we started using this tool”",
-    name: "Alec Whitten",
-    title: "CTO @ Tech Solutions",
+    text: "“Desde que implementamos la estrategia de marketing de Jarvis, nuestras conversiones han aumentado un 150%.”",
+    name: "Alberto Sánchez",
+    title: "CEO @ Soluciones Digitales",
     avatarImg: avatar4,
   },
 ];
+
 
 export const Testimonials = () => {
   return (
     <section className="py-20 md:py-24">
       <div className="container">
-        <h2 className="text-5xl md:text-6xl text-center tracking-tighter font-medium">Beyond expectations</h2>
-        <p className="text-white/70 text-lg md:text-xl text-center mt-5 tracking-tight max-w-sm mx-auto">Our revolutionary AI SEO tools have transformed our clients&apos; strategies.</p>
+      <h2 className="text-5xl md:text-6xl text-center tracking-tighter font-medium">Lo que dicen nuestros clientes</h2>
+      <p className="text-white/70 text-lg md:text-xl text-center mt-5 tracking-tight max-w-sm mx-auto">Resultados que hablan por sí mismos.</p>
         <div className="flex overflow-hidden mt-10 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
           <motion.div
             className="flex gap-5 flex-none"

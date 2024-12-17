@@ -5,7 +5,7 @@ import productImage from "@/assets/product-image.png";
 const tabs = [
   {
     icon: "/assets/lottie/vroom.lottie",
-    title: "User-friendly dashboard",
+    title: "Medimos todos tus datos",
     isNew: false,
     backgroundPositionX: 0,
     backgroundPositionY: 0,
@@ -13,7 +13,7 @@ const tabs = [
   },
   {
     icon: "/assets/lottie/click.lottie",
-    title: "One-click optimization",
+    title: "Optimización al máximo",
     isNew: false,
     backgroundPositionX: 98,
     backgroundPositionY: 100,
@@ -21,7 +21,7 @@ const tabs = [
   },
   {
     icon: "/assets/lottie/stars.lottie",
-    title: "Smart keyword generator",
+    title: "Generación de métricas",
     isNew: true,
     backgroundPositionX: 100,
     backgroundPositionY: 27,
@@ -33,8 +33,8 @@ export const Features = () => {
   return (
     <section className="py-20 md:py-24">
       <div className="container">
-        <h2 className="text-5xl md:text-6xl font-medium text-center tracking-tighter">Elevate your SEO efforts.</h2>
-        <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto tracking-tight text-center mt-5">From small startups to large enterprises, our AI-driven tool has revolutionized the way businesses approach SEO.</p>
+        <h2 className="text-5xl md:text-6xl font-medium text-center tracking-tighter">Consigue tus objetivos.</h2>
+        <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto tracking-tight text-center mt-5">Desde pequeñas startups hasta grandes empresas, nos adaptamos a ti y a tus necesidades para obtener los resultados deseados.</p>
         <div className="mt-10 flex flex-col lg:flex-row gap-3">
         {tabs.map(tab => (
           <div key={tab.title} className="border border-white/15 flex p-2.5 rounded-xl gap-2.5 items-center lg:flex-1">

@@ -83,28 +83,30 @@ const TechLines = () => {
 export const Hero = () => {
   return (
     <motion.section
-      className="h-[492px] md:h-[900px] flex flex-col items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+      className="h-[492px] md:h-[900px] flex flex-col items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
+    >
       {useMemo(() => <TechLines />, [])}
       <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgba(140,69,255,0.3)_15%,rgba(14,0,36,0.5)_78%,transparent)]"></div>
       
-      {/* Title and Button */}
-      <div className="container relative mt-8 z-10">
-        <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-purple-400 bg-[radial-gradient(100%_100%_at_top_left,#8c45ff,white,rgba(140,69,255,0.5))] text-transparent bg-clip-text text-center">Jarvis</h1>
-        <p className="text-lg md:text-xl text-purple-100/70 mt-5 text-center max-w-xl mx-auto">Tu núcleo de confianza y crecimiento.</p>
-        <div className="flex justify-center mt-5">
-          <Button>Descubre Jarvis</Button>
+      {/* Container added here */}
+      <div className="container relative z-10 flex flex-col items-center justify-center h-full">
+        {/* Title and Button */}
+        <div className="text-center mt-8">
+          <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-purple-400 bg-[radial-gradient(100%_100%_at_top_left,#8c45ff,white,rgba(140,69,255,0.5))] text-transparent bg-clip-text">Jarvis</h1>
+          <p className="text-lg md:text-xl text-purple-100/70 mt-5 max-w-xl mx-auto">Tu núcleo de confianza y crecimiento.</p>
+          <div className="flex justify-center mt-5">
+            <Button>Descubre Jarvis</Button>
+          </div>
         </div>
-      </div>
 
-      {/* Modern Web Image with Animated Gradient Border */}
-      <div className="absolute w-[400px] h-[400px] md:w-[1200px] md:h-[1200px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-32 md:mt-48">
-        <div className="relative w-full h-full rounded-xl overflow-hidden">
-          <div className="absolute inset-[2px] rounded-xl overflow-hidden">
+        {/* Modern Web Image with Animated Gradient Border */}
+        <div className="relative w-full max-w-[1200px] h-[300px] md:h-[500px] mt-10">
+          <div className="relative w-full h-full rounded-xl overflow-hidden">
             <Image
               src={headerPage}
               alt="Modern web design"
               layout="fill"
-              objectFit="contain"
+              objectFit="contain" // Cambiado a "cover" para que la imagen ocupe todo el contenedor
             />
           </div>
         </div>
