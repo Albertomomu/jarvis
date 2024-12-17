@@ -2,6 +2,8 @@
 import { Button } from "@/components/Button";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
+import Image from 'next/image';
+import headerPage from '@/assets/headerPage.png';
 
 const TechLines = () => {
   const paths = [
@@ -55,13 +57,13 @@ const TechLines = () => {
               d={path}
               fill="none"
               stroke="rgba(140, 69, 255, 0.05)"
-              strokeWidth="0.15" // Aumentar el grosor de las líneas
+              strokeWidth="0.1" // Aumentar el grosor de las líneas
             />
             <motion.path
               d={path}
               fill="none"
               stroke="url(#sparkGradient)"
-              strokeWidth="0.3" // Aumentar el grosor de las líneas animadas
+              strokeWidth="0.1" // Aumentar el grosor de las líneas animadas
               strokeLinecap="round"
               initial={{ strokeDasharray: "1 99" }} // Ajustar para mayor visibilidad
               animate={{ strokeDashoffset: ["0%", "-100%"] }}
@@ -81,7 +83,7 @@ const TechLines = () => {
 export const Hero = () => {
   return (
     <motion.section
-      className="h-[492px] md:h-[800px] flex flex-col items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+      className="h-[492px] md:h-[900px] flex flex-col items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
       {useMemo(() => <TechLines />, [])}
       <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgba(140,69,255,0.3)_15%,rgba(14,0,36,0.5)_78%,transparent)]"></div>
       
@@ -94,41 +96,19 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Start Arc Reactor */}
-      <div className="absolute h-64 w-64 md:h-96 md:w-96 rounded-full border border-purple-400/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(50%_50%_at_center,white,#8c45ff_37.7%,#1e0042)] shadow-[0_0_50px_rgb(140,69,255),0_0_100px_rgb(140,69,255)] mt-32">
-        {/* Anillo exterior */}
-        <div className="absolute inset-4 border-4 border-purple-400 rounded-full"></div>
-        
-        {/* Anillo giratorio con borde de color diferente */}
-        <motion.div 
-          className="absolute inset-8 flex items-center justify-center rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          <div className="w-full h-full border-2 border-white rounded-full relative">
-            <div className="absolute inset-0 border-2 border-blue-400 opacity-75 rounded-full" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)' }} />
+      {/* Modern Web Image with Animated Gradient Border */}
+      <div className="absolute w-[700px] h-[auto] md:w-[1200px] md:h-[1200px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-48">
+        <div className="relative w-full h-full rounded-xl overflow-hidden">
+          <div className="absolute inset-[2px] rounded-xl overflow-hidden">
+            <Image
+              src={headerPage}
+              alt="Modern web design"
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
-        </motion.div>
-        
-        {/* Núcleo central con sombra */}
-        <div className="absolute inset-0 m-auto w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full shadow-[0_0_20px_rgb(140,69,255)] flex items-center justify-center">
-          <motion.div 
-            className="w-8 h-8 bg-white rounded-full"
-            animate={{ scale: [1, 1.1, 1] }} // Manteniendo la animación de pulso
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
         </div>
       </div>
-      {/* End Arc Reactor */}
-      
     </motion.section>
   );
 };
