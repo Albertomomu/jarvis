@@ -100,7 +100,7 @@ export const Hero = () => {
         </div>
 
         {/* Modern Web Image with Animated Gradient Border */}
-        <div className="relative w-full max-w-[1200px] h-[300px] md:h-[500px] mt-10">
+        <div className="relative w-full max-w-[1200px] h-[200px] md:h-[500px] mt-10">
           <div className="relative w-full h-full rounded-xl overflow-hidden">
             <Image
               src={headerPage}
